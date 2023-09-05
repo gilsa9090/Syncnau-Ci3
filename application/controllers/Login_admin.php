@@ -14,22 +14,22 @@ class Login_admin extends CI_Controller
 
     public function index()
     {
-       if($this->session->userdata('log_in_admin')){
-        redirect('admin', 'refresh');
-       } else {
-        $data = array(
-            'username' => set_value('username'),
-            'password' => set_value('password'),
-        );
-        $this->load->view('auth/admin/login', $data);
-       }
+        if ($this->session->userdata('log_in_admin')) {
+            redirect('admin', 'refresh');
+        } else {
+            $data = array(
+                'username' => set_value('username'),
+                'password' => set_value('password'),
+            );
+            $this->load->view('admin/auth/login', $data);
+        }
     }
 
     public function proses()
     {
         $username     = addslashes(trim($this->input->post('username', true)));
         $password     = addslashes(trim($this->input->post('password', true)));
-      
+
         $row = $this->M_Login_admin->validasi_adm($username, $password);
 
         if ($row != null) {
@@ -42,9 +42,8 @@ class Login_admin extends CI_Controller
 
     public function register()
     {
-            $this->M_admin->insert();
-            redirect('login');
- 
+        $this->M_admin->insert();
+        redirect('login');
     }
 
 
@@ -58,6 +57,7 @@ class Login_admin extends CI_Controller
     public function logout()
     {
         $this->session->sess_destroy();
-        redirect('login_admin');
+        $this->notifikasi->suksesLogout();
+        redirect('login_admin', 'refresh');
     }
 }

@@ -32,6 +32,10 @@ class Notifikasi
     {
         return $this->CI->session->set_flashdata('notif', $this->notifSukses . " Berhasi Menambahkan Data. <p>" . $param . $this->notifClose);
     }
+    public function suksesLogout($param = "")
+    {
+        return $this->CI->session->set_flashdata('notif', $this->notifSukses . " Berhasi Logout, Terima Kasih <p>" . $param . $this->notifClose);
+    }
 
     public function gagalAdd($param = "")
     {
